@@ -1,0 +1,52 @@
+<!---Justin Gomez A10-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cookie Displayer</h1>
+  <p id="cookieValue">Cookie Value: Not set</p>
+  <button onclick="setCookie()">Set Cookie</button>
+
+  <footer>
+    <p>&copy; 2023 Justin Gomez | Assignment A10 Due Date: November 30, 2023</p>
+    <p>Click the set button and enter a phrase, the cookie value will be updated and when you refresh the page, notice it is still there.</p>
+  </footer>
+
+  <script>
+    function setCookie() {
+      var cookieValue = prompt("Enter the cookie value:");
+      document.cookie = "exampleCookie=" + cookieValue;
+      displayCookieValue();
+    }
+
+    function displayCookieValue() {
+      var cookieArray = document.cookie.split(';');
+      var cookieValue = "Not set";
+
+      for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i].trim();
+        if (cookie.indexOf("exampleCookie=") === 0) {
+          cookieValue = cookie.substring("exampleCookie=".length, cookie.length);
+          break;
+        }
+      }
+
+      document.getElementById("cookieValue").innerText = "Cookie Value: " + cookieValue;
+    }
+
+    // Display the cookie value on page load
+    window.onload = displayCookieValue;
+  </script>
+</body>
+</html>
